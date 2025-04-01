@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TransUnion Blackbox Collection</title>
+</head>
+
+<body>
+    <h2>TransUnion Blackbox Collection</h2>
+
+    <form id="form">
+        <input type="hidden" id="ioBlackBox" name="ioBlackBox" >
+
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <script>
+
+        document.getElementById("form").addEventListener("submit", async function (event) {
+            event.preventDefault()
+
+            const blackbox = document.getElementById("ioBlackBox").value
+            console.log('blackbox',blackbox)
+
+            const res = await fetch("http://127.0.0.1:9000/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ioBlackBox: blackbox })
+            })
+
+            console.log('response',res)
+
+            const data = await res.json()
+            console.log('response', data)
+
+        })
+    </script>
+    <script lang="javascript" src="./config.js"></script>
+    <script language="javascript" src="loader.js"></script>
+</body>
+
+</html> 
+
+
+
+
+
+
+
